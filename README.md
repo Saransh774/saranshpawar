@@ -1,4 +1,4 @@
-# 👋 Hi, I'm Saransh Pawar  
+# Hi, I'm Saransh Pawar  
 🎓 Electronics & Telecommunication Engineer | 💡 IoT & Embedded Systems Enthusiast  
 
 ---
@@ -69,9 +69,9 @@ My goal is to apply my academic knowledge to real-world challenges through **IoT
 
 ## 📫 Contact  
 📞 **Phone:** +91 78874 17251  
-✉️ **Email:** [saranshpawar.skn.entc@gmail.com](mailto:saranshpawar.skn.entc@gmail.com)  
-🔗 **LinkedIn:** [linkedin.com/in/saranshpawar](https://linkedin.com/in/saranshpawar) *(replace with your actual link)*  
-💻 **GitHub:** [github.com/saranshpawar](https://github.com/saranshpawar) *(replace with your actual GitHub username)*  
+✉️ **Email:** [saranshpawar123@gmail.com](mailto:saranshpawar123@gmail.com)  
+🔗 **LinkedIn:** [linkedin.com/in/saransh-pawar-2859a9257](www.linkedin.com/in/saransh-pawar-2859a9257)   
+💻 **GitHub:** [github.com/Saransh774/saranshpawar](https://github.com/Saransh774/saranshpawar)   
 
 ---
 
