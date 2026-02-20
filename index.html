@@ -2,174 +2,481 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Saransh Pawar | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saransh Pawar — Embedded Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fc;
-      color: #333;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #F7F5F0; --ink: #1A1A18; --muted: #7A7A72;
+      --accent: #2D6A4F; --accent-light: #D8F3DC;
+      --line: #DDD9D0; --card: #FFFFFF;
+      --serif: 'DM Serif Display', serif;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
     }
-    header {
-      background: linear-gradient(135deg, #0078ff, #00c6ff);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-    }
-    header h1 {
-      margin: 10px 0;
-      font-size: 2.5em;
-    }
-    header p {
-      font-size: 1.2em;
-      opacity: 0.9;
-    }
-    section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #0078ff;
-      border-left: 4px solid #0078ff;
-      padding-left: 10px;
-    }
-    ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    ul li {
-      margin-bottom: 10px;
-      line-height: 1.6;
-    }
-    .contact a {
-      color: #0078ff;
-      text-decoration: none;
-    }
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 0.9em;
-      background: #eef4fb;
-    }
-    .skills, .projects {
-      margin-top: 15px;
-    }
-    .project {
-      background: #f1f8ff;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .project h3 {
-      margin-top: 0;
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--ink); font-family:var(--sans); font-weight:300; line-height:1.7; overflow-x:hidden; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.2rem 4rem; background:rgba(247,245,240,0.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+    .nav-logo { font-family:var(--mono); font-size:0.85rem; letter-spacing:0.08em; color:var(--accent); text-decoration:none; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; }
+    .nav-links a { font-family:var(--mono); font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--ink); }
+
+    /* HERO */
+    .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:80px; }
+    .hero-left { display:flex; flex-direction:column; justify-content:center; padding:6rem 4rem; border-right:1px solid var(--line); }
+    .hero-tag { font-family:var(--mono); font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:1.5rem; opacity:0; animation:fadeUp 0.6s 0.1s forwards; }
+    .hero-name { font-family:var(--serif); font-size:clamp(3rem,6vw,5.5rem); line-height:1.05; margin-bottom:1.5rem; opacity:0; animation:fadeUp 0.6s 0.2s forwards; }
+    .hero-name em { font-style:italic; color:var(--accent); }
+    .hero-desc { font-size:1.05rem; color:var(--muted); max-width:440px; margin-bottom:2.5rem; opacity:0; animation:fadeUp 0.6s 0.3s forwards; }
+    .hero-cta { display:flex; gap:1rem; flex-wrap:wrap; opacity:0; animation:fadeUp 0.6s 0.4s forwards; }
+    .btn { display:inline-block; padding:0.75rem 1.8rem; font-family:var(--mono); font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; border-radius:2px; transition:all 0.2s; cursor:pointer; font-family:var(--mono); }
+    .btn-primary { background:var(--ink); color:var(--bg); border:1.5px solid var(--ink); }
+    .btn-primary:hover { background:var(--accent); border-color:var(--accent); }
+    .btn-outline { background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+    .btn-outline:hover { background:var(--ink); color:var(--bg); }
+    .hero-right { display:flex; flex-direction:column; justify-content:flex-end; padding:4rem; opacity:0; animation:fadeIn 1s 0.5s forwards; }
+    .stat-row { display:flex; justify-content:space-between; align-items:flex-end; padding:1.8rem 0; border-bottom:1px solid var(--line); }
+    .stat-row:first-child { border-top:1px solid var(--line); }
+    .stat-label { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+    .stat-value { font-family:var(--serif); font-size:2.2rem; color:var(--ink); }
+    .stat-sub { font-family:var(--mono); font-size:0.72rem; color:var(--muted); }
+
+    /* SECTIONS */
+    section { padding:7rem 4rem; }
+    .section-label { font-family:var(--mono); font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem; }
+    .section-title { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); line-height:1.1; margin-bottom:4rem; }
+    .section-divider { border:none; border-top:1px solid var(--line); margin:0; }
+
+    /* ABOUT */
+    #about { display:grid; grid-template-columns:1fr 1fr; gap:6rem; border-bottom:1px solid var(--line); }
+    .about-text { font-size:1.05rem; color:var(--muted); line-height:1.85; }
+    .about-text p + p { margin-top:1.2rem; }
+    .about-contact { margin-top:2rem; }
+    .contact-item { display:flex; align-items:center; gap:0.6rem; font-family:var(--mono); font-size:0.8rem; color:var(--ink); margin-bottom:0.6rem; }
+    .contact-item a { color:var(--ink); text-decoration:none; }
+    .contact-item a:hover { color:var(--accent); }
+    .contact-dot { width:6px; height:6px; background:var(--accent); border-radius:50%; flex-shrink:0; }
+
+    /* SKILLS */
+    #skills { border-bottom:1px solid var(--line); }
+    .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); }
+    .skill-card { background:var(--card); padding:2rem; transition:background 0.2s; }
+    .skill-card:hover { background:var(--accent-light); }
+    .skill-card-label { font-family:var(--mono); font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+    .skill-tags { display:flex; flex-wrap:wrap; gap:0.5rem; }
+    .skill-tag { font-family:var(--mono); font-size:0.75rem; padding:0.3rem 0.7rem; border:1px solid var(--line); border-radius:2px; color:var(--ink); background:var(--bg); }
+
+    /* EXPERIENCE */
+    #experience { border-bottom:1px solid var(--line); }
+    .exp-item { display:grid; grid-template-columns:200px 1fr; gap:3rem; padding:2.5rem 0; border-bottom:1px solid var(--line); }
+    .exp-item:last-child { border-bottom:none; }
+    .exp-company { font-family:var(--mono); font-size:0.78rem; letter-spacing:0.08em; color:var(--accent); margin-bottom:0.3rem; }
+    .exp-date { font-family:var(--mono); font-size:0.72rem; color:var(--muted); }
+    .exp-role { font-family:var(--serif); font-size:1.4rem; margin-bottom:0.8rem; }
+    .exp-desc { font-size:0.95rem; color:var(--muted); }
+    .exp-desc li { margin-bottom:0.4rem; padding-left:1.2rem; position:relative; list-style:none; }
+    .exp-desc li::before { content:"→"; position:absolute; left:0; color:var(--accent); font-size:0.8rem; }
+
+    /* PROJECTS */
+    #projects { border-bottom:1px solid var(--line); }
+    .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:1.5rem; }
+    .project-card { background:var(--card); border:1px solid var(--line); padding:2rem; border-radius:2px; transition:transform 0.25s, box-shadow 0.25s; display:flex; flex-direction:column; }
+    .project-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.07); }
+    .project-num { font-family:var(--mono); font-size:0.7rem; color:var(--muted); margin-bottom:1rem; }
+    .project-title { font-family:var(--serif); font-size:1.3rem; margin-bottom:0.5rem; }
+    .project-stack { font-family:var(--mono); font-size:0.72rem; color:var(--accent); margin-bottom:1rem; letter-spacing:0.05em; }
+    .project-desc { font-size:0.9rem; color:var(--muted); line-height:1.75; flex:1; }
+    .project-highlights { margin-top:1.2rem; padding-top:1rem; border-top:1px solid var(--line); }
+    .project-highlight-item { font-size:0.84rem; color:var(--muted); padding:0.2rem 0 0.2rem 1.1rem; position:relative; }
+    .project-highlight-item::before { content:"✦"; position:absolute; left:0; color:var(--accent); font-size:0.6rem; top:0.38rem; }
+
+    /* ACTIVITIES */
+    #activities { border-bottom:1px solid var(--line); }
+    .activity-item { display:flex; justify-content:space-between; align-items:flex-start; padding:1.8rem 0; border-bottom:1px solid var(--line); gap:1rem; }
+    .activity-item:last-child { border-bottom:none; }
+    .activity-name { font-family:var(--serif); font-size:1.2rem; }
+    .activity-detail { font-size:0.9rem; color:var(--muted); margin-top:0.2rem; }
+    .activity-badge { font-family:var(--mono); font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; padding:0.3rem 0.8rem; border:1px solid var(--accent); color:var(--accent); border-radius:20px; white-space:nowrap; flex-shrink:0; }
+
+    /* FOOTER */
+    footer { padding:4rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .footer-name { font-family:var(--serif); font-size:1.5rem; }
+    .footer-mono { font-family:var(--mono); font-size:0.75rem; color:var(--muted); }
+
+    /* CONTACT MODAL */
+    .modal-overlay { display:none; position:fixed; inset:0; z-index:999; background:rgba(26,26,24,0.55); backdrop-filter:blur(6px); align-items:center; justify-content:center; }
+    .modal-overlay.open { display:flex; }
+    .modal { background:var(--card); border:1px solid var(--line); padding:3rem; max-width:480px; width:90%; border-radius:4px; position:relative; animation:modalIn 0.3s ease; }
+    @keyframes modalIn { from{opacity:0;transform:scale(0.95) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
+    .modal-close { position:absolute; top:1.2rem; right:1.2rem; background:none; border:none; cursor:pointer; font-size:1.3rem; color:var(--muted); line-height:1; transition:color 0.2s; }
+    .modal-close:hover { color:var(--ink); }
+    .modal-tag { font-family:var(--mono); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:0.5rem; }
+    .modal-title { font-family:var(--serif); font-size:2rem; margin-bottom:2rem; }
+    .modal-item { display:flex; align-items:center; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--line); }
+    .modal-item:last-child { border-bottom:none; }
+    .modal-icon { width:40px; height:40px; background:var(--accent-light); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:1rem; }
+    .modal-item-label { font-family:var(--mono); font-size:0.68rem; color:var(--muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.15rem; }
+    .modal-item-value { font-size:0.95rem; color:var(--ink); }
+    .modal-item-value a { color:var(--ink); text-decoration:none; }
+    .modal-item-value a:hover { color:var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      nav{padding:1rem 1.5rem}
+      .nav-links{gap:1rem}
+      .nav-links a{font-size:0.68rem}
+      .hero{grid-template-columns:1fr}
+      .hero-left{padding:5rem 1.5rem 2rem}
+      .hero-right{padding:2rem 1.5rem;border-top:1px solid var(--line)}
+      #about{grid-template-columns:1fr;gap:2rem;padding:4rem 1.5rem}
+      section{padding:4rem 1.5rem}
+      .exp-item{grid-template-columns:1fr;gap:0.5rem}
+      footer{padding:3rem 1.5rem}
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>👋 Hi, I'm Saransh Pawar</h1>
-    <p>Electronics & Telecommunication Engineer | IoT & Embedded Systems Enthusiast</p>
-  </header>
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" id="contactModal" onclick="closeModalOnOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&#x2715;</button>
+    <p class="modal-tag">Let's Connect</p>
+    <h2 class="modal-title">Get In Touch</h2>
+    <div class="modal-item">
+      <div class="modal-icon">&#128241;</div>
+      <div>
+        <div class="modal-item-label">Phone</div>
+        <div class="modal-item-value"><a href="tel:+917887417251">+91 7887417251</a></div>
+      </div>
+    </div>
+    <div class="modal-item">
+      <div class="modal-icon">&#9993;</div>
+      <div>
+        <div class="modal-item-label">Email</div>
+        <div class="modal-item-value"><a href="mailto:Saranshpawar123@gmail.com">Saranshpawar123@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="modal-item">
+      <div class="modal-icon">&#128188;</div>
+      <div>
+        <div class="modal-item-label">LinkedIn</div>
+        <div class="modal-item-value"><a href="https://www.linkedin.com/in/saransh-pawar-2859a9257" target="_blank">saransh-pawar-2859a9257</a></div>
+      </div>
+    </div>
+    <div class="modal-item">
+      <div class="modal-icon">&#128205;</div>
+      <div>
+        <div class="modal-item-label">Location</div>
+        <div class="modal-item-value">Pune, Maharashtra, India</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <section>
-    <h2>🧠 About Me</h2>
-    <p>
-      I’m a passionate and motivated Electronics & Telecommunication Engineering student from
-      <strong>Shrimati Kashibai Navale College of Engineering, Pune</strong> (2022–2026).
-      My focus is on applying IoT and embedded systems to solve real-world problems and create smarter automation systems.
-    </p>
-  </section>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SP / Portfolio</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#activities">Activities</a></li>
+  </ul>
+</nav>
 
-  <section>
-    <h2>💼 Internship</h2>
-    <h3>Electronics Intern | Mass IT Solution LLP (Jan 2025 – Feb 2025)</h3>
-    <ul>
-      <li>Developed a home automation system using ESP32 and DHT11 sensor.</li>
-      <li>Designed a web-based interface to control appliances remotely.</li>
-      <li>Monitored real-time temperature and humidity data using IoT integration.</li>
-    </ul>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Embedded Engineer &amp; IoT Developer</p>
+    <h1 class="hero-name">Saransh<br><em>Pawar</em></h1>
+    <p class="hero-desc">Electronics &amp; Telecommunication student at SPPU, passionate about building smart embedded systems, IoT solutions, and hardware-software integrations that solve real-world problems.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" onclick="openModal()">Get In Touch</button>
+      <a href="#projects" class="btn btn-outline">View Projects</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="stat-row">
+      <span class="stat-label">Location</span>
+      <div style="text-align:right">
+        <div class="stat-value" style="font-size:1.4rem">Pune, India</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Degree</span>
+      <div style="text-align:right">
+        <div class="stat-value" style="font-size:1.2rem">B.E. E&amp;TC</div>
+        <div class="stat-sub">2022 – 2026</div>
+      </div>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Projects Built</span>
+      <div class="stat-value">3+</div>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Microcontrollers</span>
+      <div class="stat-value" style="font-size:1.3rem">Arduino · ESP32 · ARM</div>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>💡 Projects</h2>
+<hr class="section-divider">
 
-    <div class="project">
-      <h3>🏠 Home Automation System using ESP32</h3>
-      <p>Controlled appliances through a web interface while monitoring real-time temperature and humidity using the DHT11 sensor.</p>
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">01 — About</p>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-text">
+      <p>I'm a final-year Electronics &amp; Telecommunication Engineering student at Savitribai Phule Pune University with a strong foundation in embedded systems, microcontroller programming, and IoT development.</p>
+      <p>I love bridging the gap between hardware and software — whether it's programming an ESP32 for wireless control, designing PCBs in Proteus, or building Flutter apps that communicate with embedded devices.</p>
+      <p>Outside academics, I coordinate robotics events, volunteer with NSS, and contribute to the college robotics team — always eager to learn and build solutions that matter.</p>
+    </div>
+    <div class="about-contact">
+      <div class="contact-item"><span class="contact-dot"></span><a href="tel:+917887417251">+91 7887417251</a></div>
+      <div class="contact-item"><span class="contact-dot"></span><a href="mailto:Saranshpawar123@gmail.com">Saranshpawar123@gmail.com</a></div>
+      <div class="contact-item"><span class="contact-dot"></span><a href="https://www.linkedin.com/in/saransh-pawar-2859a9257" target="_blank">linkedin.com/in/saransh-pawar-2859a9257</a></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <p class="section-label">Education</p>
+    <h2 class="section-title" style="margin-bottom:1.5rem">Academic<br><em style="font-style:italic;color:var(--accent)">Background</em></h2>
+    <div style="background:var(--card);border:1px solid var(--line);padding:2rem;border-radius:2px;">
+      <div style="font-family:var(--mono);font-size:0.72rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem">2022 – 2026</div>
+      <div style="font-family:var(--serif);font-size:1.5rem;margin-bottom:0.3rem">Bachelor of Engineering</div>
+      <div style="font-size:0.95rem;color:var(--muted)">Electronics &amp; Telecommunication</div>
+      <div style="font-size:0.9rem;color:var(--muted);margin-top:0.3rem">Savitribai Phule Pune University, Pune</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label reveal">02 — Skills</p>
+  <h2 class="section-title reveal">Technical <em style="font-style:italic;color:var(--accent)">Expertise</em></h2>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-card-label">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">C</span><span class="skill-tag">C++</span>
+        <span class="skill-tag">Python</span><span class="skill-tag">Embedded C</span>
+        <span class="skill-tag">Java</span><span class="skill-tag">Dart / Flutter</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Microcontrollers &amp; Platforms</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Arduino</span><span class="skill-tag">ESP32</span>
+        <span class="skill-tag">ARM Cortex</span><span class="skill-tag">PIC</span>
+        <span class="skill-tag">8051</span><span class="skill-tag">Raspberry Pi</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Electronics &amp; Design</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Analog Electronics</span>
+        <span class="skill-tag">Digital Electronics</span>
+        <span class="skill-tag">PCB Design</span>
+        <span class="skill-tag">IoT</span>
+        <span class="skill-tag">Proteus</span>
+        <span class="skill-tag">Autodesk Fusion</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-label">Tools &amp; IDEs</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MATLAB</span><span class="skill-tag">Multisim</span>
+        <span class="skill-tag">Eagle</span><span class="skill-tag">STM32 CubeIDE</span>
+        <span class="skill-tag">MPLAB</span><span class="skill-tag">Keil uVision</span>
+        <span class="skill-tag">Arduino IDE</span><span class="skill-tag">Flutter</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label reveal">03 — Experience</p>
+  <h2 class="section-title reveal">Work <em style="font-style:italic;color:var(--accent)">Experience</em></h2>
+  <div class="exp-item reveal">
+    <div class="exp-meta">
+      <div class="exp-company">MASS IT SOLUTION</div>
+      <div class="exp-date">Jan 2025 – Feb 2025</div>
+      <div class="exp-date" style="margin-top:0.2rem">Pune, Maharashtra</div>
+    </div>
+    <div>
+      <div class="exp-role">Embedded Systems Intern</div>
+      <ul class="exp-desc">
+        <li>Developed a home automation prototype using ESP32 microcontroller and DHT11 temperature &amp; humidity sensors, enabling wireless device control via Wi-Fi.</li>
+        <li>Implemented real-time temperature monitoring and automated control logic using IoT protocols, allowing remote actuation of connected home appliances.</li>
+        <li>Gained practical experience in sensor integration, firmware development, and wireless communication in a professional industry setting.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label reveal">04 — Projects</p>
+  <h2 class="section-title reveal">Featured <em style="font-style:italic;color:var(--accent)">Projects</em></h2>
+  <div class="projects-grid">
+
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-title">Solar Power Monitoring System</div>
+      <div class="project-stack">Arduino IDE · Proteus · Voltage &amp; Current Sensors</div>
+      <p class="project-desc">
+        A real-time embedded system to monitor the performance and efficiency of solar panels. Voltage and current sensors are interfaced with a microcontroller to continuously measure energy output. Processed readings are displayed on an LCD, giving instant visibility into panel health. The system flags drops in performance using threshold-based logic, helping users identify faults and optimize energy harvesting.
+      </p>
+      <div class="project-highlights">
+        <div class="project-highlight-item">Measures voltage, current &amp; power output in real time</div>
+        <div class="project-highlight-item">Threshold alerts detect underperforming or faulty panels</div>
+        <div class="project-highlight-item">Full circuit simulated &amp; verified in Proteus before hardware build</div>
+        <div class="project-highlight-item">Helps maximize solar energy utilization and reduce wastage</div>
+      </div>
     </div>
 
-    <div class="project">
-      <h3>🔥 Fire Alarm System using IoT</h3>
-      <p>Built a fire detection system with smoke and gas sensors that trigger sirens and send alerts through IoT connectivity.</p>
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-title">IoT-Based Fire Alarm System</div>
+      <div class="project-stack">ESP32 · MQ2 Gas Sensor · Arduino IDE · Blynk App</div>
+      <p class="project-desc">
+        An intelligent fire detection system that uses the MQ2 sensor to identify dangerous levels of smoke, LPG, and carbon monoxide. On threat detection, the ESP32 triggers a local buzzer alarm and simultaneously sends real-time push notifications to a smartphone via the Blynk IoT platform — enabling remote monitoring from anywhere. The system is ideal for homes, labs, and industrial setups where early fire detection is critical.
+      </p>
+      <div class="project-highlights">
+        <div class="project-highlight-item">Detects smoke, LPG &amp; CO gas with MQ2 sensor</div>
+        <div class="project-highlight-item">Instant mobile push notifications via Blynk dashboard</div>
+        <div class="project-highlight-item">ESP32 Wi-Fi enables internet-connected remote monitoring</div>
+        <div class="project-highlight-item">Local buzzer &amp; LED provide on-site alarm indication</div>
+      </div>
     </div>
 
-    <div class="project">
-      <h3>☀️ Solar Power Monitoring System</h3>
-      <p>Developed a system to track solar panel performance and efficiency using microcontroller-based data acquisition.</p>
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-title">Automated Waste Segregation System</div>
+      <div class="project-stack">Arduino UNO · IR · Metal · Raindrop Sensors · Servo Motors · Proteus</div>
+      <p class="project-desc">
+        A smart waste management system that automatically classifies incoming waste into three categories — wet, dry, and metallic — without human intervention. An IR sensor detects object presence, a metal sensor identifies metallic waste, and a raindrop/moisture sensor distinguishes wet from dry. The Arduino UNO then activates corresponding servo motors to direct the waste into the correct bin, reducing manual sorting and improving recycling efficiency.
+      </p>
+      <div class="project-highlights">
+        <div class="project-highlight-item">Auto-classifies waste into wet, dry &amp; metallic categories</div>
+        <div class="project-highlight-item">Multi-sensor fusion: IR, metal detector &amp; moisture sensor</div>
+        <div class="project-highlight-item">Servo motors physically route waste to the correct bin</div>
+        <div class="project-highlight-item">Circuit designed &amp; validated in Proteus simulator</div>
+        <div class="project-highlight-item">Promotes sustainable waste management &amp; recycling</div>
+      </div>
     </div>
 
-    <div class="project">
-      <h3>🗑️ Automated Waste Segregation System</h3>
-      <p>Created a smart setup using IR, metal, and raindrop sensors to automatically classify waste into dry, wet, and metallic categories.</p>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <p class="section-label reveal">05 — Leadership &amp; Activities</p>
+  <h2 class="section-title reveal">Beyond <em style="font-style:italic;color:var(--accent)">Academics</em></h2>
+  <div>
+    <div class="activity-item reveal">
+      <div>
+        <div class="activity-name">Event Coordinator — Sociobotics, Techtonic 2024</div>
+        <div class="activity-detail">Sinhgad College of Engineering, Pune · Led full event planning, participant management, and on-spot technical troubleshooting for a robotics competition. Managed 10+ participants, set judging criteria, and ensured smooth execution — receiving positive feedback from faculty and participants.</div>
+      </div>
+      <span class="activity-badge">Leadership</span>
     </div>
-  </section>
+    <div class="activity-item reveal">
+      <div>
+        <div class="activity-name">Team Robotics, SKNCOE</div>
+        <div class="activity-detail">Active member of the college robotics team. Contributed to bot design, circuit layout, and technical setup for inter-college robotics competitions.</div>
+      </div>
+      <span class="activity-badge">Technical</span>
+    </div>
+    <div class="activity-item reveal">
+      <div>
+        <div class="activity-name">NSS Volunteer</div>
+        <div class="activity-detail">Participated in National Service Scheme community outreach programs, awareness campaigns, and social initiatives — contributing toward meaningful community development.</div>
+      </div>
+      <span class="activity-badge">Community</span>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>🧩 Certifications & Achievements</h2>
-    <ul>
-      <li>Robotics Virtual Internship – KODACY x SPACE (Feb 2024)</li>
-      <li>MindSpark Roborace Participant – COEP Technological University (Oct 2023)</li>
-    </ul>
-  </section>
+<!-- FOOTER -->
+<footer class="reveal">
+  <div>
+    <div class="footer-name">Saransh Pawar</div>
+    <div class="footer-mono">Embedded Engineer · Pune, India</div>
+  </div>
+  <div style="text-align:right">
+    <button class="btn btn-primary" onclick="openModal()">Say Hello &#8594;</button>
+    <div class="footer-mono" style="margin-top:0.8rem">&#169; 2025 Saransh Pawar</div>
+  </div>
+</footer>
 
-  <section>
-    <h2>🛠 Skills</h2>
-    <ul class="skills">
-      <li><strong>Programming:</strong> C, C++, Python, Embedded C</li>
-      <li><strong>Hardware:</strong> ESP32, NodeMCU, Arduino, Sensors, PCB Design</li>
-      <li><strong>Tools:</strong> Proteus, Tinkercad, MATLAB (Basics)</li>
-    </ul>
-  </section>
+<script>
+  // MODAL
+  function openModal() {
+    document.getElementById('contactModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('contactModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOnOverlay(e) {
+    if (e.target === document.getElementById('contactModal')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  <section>
-    <h2>🏅 Responsibilities</h2>
-    <ul>
-      <li>Event Coordinator – Sociorobotics, Sinhgad Techtonic 2024</li>
-      <li>Team Member – TeamRobotics SKNCOE</li>
-      <li>Volunteer – Bhumi NGO</li>
-    </ul>
-  </section>
+  // SMOOTH SCROLL for nav links
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        const offset = target.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      }
+    });
+  });
 
-  <section>
-    <h2>🌍 Interests</h2>
-    <ul>
-      <li>Photography & Videography</li>
-      <li>Trekking & Exploring Nature</li>
-      <li>Playing Badminton</li>
-      <li>Community Volunteering</li>
-    </ul>
-  </section>
+  // VIEW PROJECTS button smooth scroll
+  document.querySelector('a[href="#projects"]').addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector('#projects');
+    if (target) {
+      const offset = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }
+  });
 
-  <section class="contact">
-    <h2>📫 Contact</h2>
-    <ul>
-      <li><strong>Phone:</strong> +91 78874 17251</li>
-      <li><strong>Email:</strong> <a href="mailto:saranshpawar123@gmail.com">saranshpawar123@gmail.com</a></li>
-      <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/saransh-pawar-2859a9257" target="_blank">linkedin.com/in/saransh-pawar-2859a9257</a></li>
-      <li><strong>GitHub:</strong> <a href="https://github.com/Saransh774/saranshpawar" target="_blank">github.com/Saransh774/saranshpawar</a></li>
-    </ul>
-  </section>
+  // SCROLL REVEAL
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
 
-  <footer>
-    © 2025 Saransh Pawar | Made with 💙 using HTML & GitHub Pages
-  </footer>
-
+  // ACTIVE NAV HIGHLIGHT on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
 </body>
 </html>
